@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>138 Little Stars ✨</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, serif;
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #6b4a35 0%,
+      #3f2a20 45%,
+      #1b110d 100%
+    );
+
+  overflow-x: hidden;
+}
+
+/* BACKGROUND STARS */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image:
+    radial-gradient(#ffffff 1px, transparent 1px),
+    radial-gradient(#ffffff 1px, transparent 1px);
+
+  background-size:
+    55px 55px,
+    90px 90px;
+
+  background-position:
+    10px 20px,
+    30px 50px;
+
+  opacity: 0.25;
+
+  pointer-events: none;
+}
+
+
+/* HEADER */
+
+.header {
+  text-align: center;
+  padding: 35px 15px 15px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 8px;
+  line-height: 1.7;
+}
+
+.since {
+  display: block;
+  font-size: 11px;
+  opacity: 0.8;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+
+/* JAR */
+
+.jar {
+  width: min(94vw, 520px);
+
+  margin: 25px auto 45px;
+
+  padding: 30px 18px 38px;
+
+  border: 2px solid rgba(255,255,255,0.18);
+
+  border-radius:
+    45px
+    45px
+    55px
+    55px;
+
+  background: rgba(255,255,255,0.06);
+
+  box-shadow:
+    inset 0 0 35px rgba(255,255,255,0.04),
+    0 20px 60px rgba(0,0,0,0.35);
+}
+
+
+/* STARS */
+
+.stars {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 14px 5px;
+}
+
+.star {
+  border: none;
+
+  background: none;
+
+  color: #ffe9a6;
+
+  font-size: 29px;
+
+  padding: 4px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+
+  filter:
+    drop-shadow(
+      0 0 7px
+      rgba(255,220,120,0.55)
+    );
+}
+
+.star:hover {
+  transform:
+    scale(1.3)
+    rotate(-8deg);
+
+  filter:
+    drop-shadow(
+      0 0 14px
+      rgba(255,235,150,0.95)
+    );
+}
+
+.star:active {
+  transform:
+    scale(1.35)
+    rotate(-8deg);
+}
+
+
+/* MESSAGE POPUP */
+
+.modal {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(4,3,10,0.82);
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  z-index: 10;
+}
+
+.modal.show {
+  display: flex;
+}
+
+
+/* MESSAGE CARD */
+
+.message-card {
+  width: min(90vw, 400px);
+
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf0,
+      #f2e2c8
+    );
+
+  color: #352840;
+
+  border-radius: 25px;
+
+  padding: 30px 24px 25px;
+
+  text-align: center;
+
+  box-shadow:
+    0 20px 70px
+    rgba(0,0,0,0.55);
+
+  animation:
+    pop 0.25s ease;
+}
+
+@keyframes pop {
+
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
+
+
+/* BIG STAR */
+
+.big-star {
+  font-size: 48px;
+
+  margin-bottom: 5px;
+}
+
+
+/* STAR NUMBER */
+
+.star-number {
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+
+  opacity: 0.45;
+
+  margin-bottom: 15px;
+}
+
+
+/* MESSAGE */
+
+.message {
+  font-size: 19px;
+
+  line-height: 1.6;
+
+  white-space: pre-wrap;
+
+  min-height: 70px;
+}
+
+
+/* CLOSE BUTTON */
+
+.close-button {
+  margin-top: 20px;
+
+  border: none;
+
+  background: #352840;
+
+  color: white;
+
+  border-radius: 999px;
+
+  padding: 10px 22px;
+
+  cursor: pointer;
+
+  font-family: Arial, sans-serif;
+}
+
+.close-button:hover {
+  opacity: 0.85;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+  .title {
+    font-size: 28px;
+  }
+
+  .jar {
+    width: 94vw;
+    padding: 25px 12px 30px;
+  }
+
+  .stars {
+    gap: 12px 3px;
+  }
+
+  .star {
+    font-size: 25px;
+  }
+
+  .message-card {
+    padding: 27px 20px 22px;
+  }
+
+  .message {
+    font-size: 17px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+  <h1 class="title">
+    138 Little Stars ✨
+  </h1>
+
+  <div class="subtitle">
+
+    tap a star to discover a little message ♡
+
+    <span class="since">
+      since June 2024
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- STAR JAR -->
+
+<div class="jar">
+
+  <div
+    class="stars"
+    id="stars">
+  </div>
+
+</div>
+
+
+<!-- MESSAGE MODAL -->
+
+<div
+  class="modal"
+  id="modal"
+  onclick="closeOutside(event)"
+>
+
+  <div class="message-card">
+
+    <div class="big-star">
+      ⭐
+    </div>
+
+    <div
+      class="star-number"
+      id="starNumber">
+    </div>
+
+    <div
+      class="message"
+      id="message">
+    </div>
+
+    <button
+      class="close-button"
+      onclick="closeMessage()"
+    >
+      close ♡
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+
+/* ========================================
+   LITTLE STAR MESSAGES
+======================================== */
+
+const messages = [
+
+  "hai! ini pesan pertama di little star made by ens^^ - 16 juni 2024",
+
+  "selamat ulang tahun kyy, doa terbaik untuk kamu, i’ll keep these feelings in my heart and i’m not letting go, just letting it flow. - 13 oktober 2026",
+
+  "jujur aku bingung cara pakenya karena ini pake coding:)) aku belajar coding dulu ya - 19 juni 2024",
+
+  "kamu tau cerita pencuri kambing? yang katanya “saya cuma curi talinya, gatau kalo kambingnya ngikut”.. ya sama pak, saya cuma curi curi pandang, ga tau kalau hatinya ngikut - 17 juni 2024",
+
+  "salah satu aku diberi alasan untuk hidup : being to your mine",
+
+  "ini gimana ya caranya supaya pesannya ga acak? nanti aku coba coba dulu deh, maaf yaa kalau nanti pesannya acak - 21 juni 2024",
+
+  "sayanggg, senengg bangett akhirnya aku bisa terima kamu, jadi my mine aku terus yaaa<3 - mei 2026",
+
+  "kenapa kamu hadir ketika i have a lot problems? kita adalah rasa yang tepat di waktu yang salah - 22 juni 2024",
+
+  "aku cape bgt dituduh pny yg lain.. aku butuh waktu dulu, aku lagi low energy bgt - 28 juni 2024",
+
+  "oke lost contact - agustus 2024.",
+
+  "namanya muhammad syuhada al rizky ady putra lahir di teluk batang 13 oktober 2003 anak pertama dari 3 bersaudara - 16 juni 2024",
+
+  "maaf, aku jatuh suka - 16 juni 2024",
+
+  "kamu masi mau nda ya sama aku kalau kamu tau aku have a two",
+
+  "kata ilmuan, gravitasi itu bikin semua jatuh ke bumi. tapi kenapa aku malah jatuhnya ke kamu?",
+
+  "dia buatin aku word ( to enes ) isinya tentang aku… lucu bangettt",
+
+  "satu hal yang aku suka dari kamu: kamu bisa bikin aku percaya dan jadi diri sendiri",
+
+  "jujur bgt aku tu saltinggg kalo sama kamu, bukan cuekkk atau bdmd, itu aku lagi nahan dirii biar tetap tenang wkwkwkkwkw - 29 juni 2024",
+
+  "hai kamu jangan lupa istirahattt yang cukupp - 3 november 2025",
+
+  "you’re making it really hard for me to act like i don’t care - 2 oktober 2026",
+
+  "some people come and go, but somehow you became one of the stories i keep coming back to",
+
+  "aku suka saat kamu inget sesuatu tentang aku yang bahkan aku sendiri hampir lupa - 7 agustus 2025",
+
+  "jadi pengen nguji deh perjuangan kamu buat luluhin hati aku ini sampe mana #jualmahal",
+
+  "dari banyak kemungkinan, lagi, lagi dan lagi aku jatuhnya ke kamu - 9 oktober 2025",
+
+  "kamu tu kayaa jalan pulang, entah kenapa selalu jadi yang paling pengen dituju.",
+
+  "mungkin kita ketemu bukan di waktu yang sempurna, tapi cukup di waktu yang bikin aku selalu nyaman buat tetap di sini - 12 oktober 2026",
+
+  "tangan kamu kosong banget, coba tambahin aksesoris like a watch, bracelet, or maybe my hand:p - 7 juli 2024",
+
+  "loh kamu tu lahir nya 13 oktober ya? kirain 10 oktober, soalya kamu 10/10 banget sihh",
+
+  "mau tau yang menarik nda sayangg? kamu - 13 mei 2026",
+
+  "ternyata nyaman itu nda selalu datang dari orang yang udah lama dikenal",
+
+  "kalau kamu tiba-tiba ndaa muncul sehari, kayaknya aku bakal sadar deh. masalahnya, aku ndaatauu sejak kapan aku mulai merhatiin.",
+
+  "kalau aku boleh milih satu hal kecil yang terjadi hari ini, mungkin aku bakal pilih ngobrol sama kamu lagi - 23 september 2026",
+
+  "kalau aku punya mesin waktu, aku akan ajak kamu ngobrol ulang tentang apa yang terjadi sama aku dan maunya kita, supaya kita nda miscommunication",
+
+  "banyak hal yang sudah aku lewatin, tapi kenapa bagian tentang kamu masih terasa belum selesai?",
+
+  "kalaupun memang harus selesai, kenapa beberapa kenangan masih terasa seperti baru kemarin? - 24 september 2026",
+
+  "maaf aku genit, soalnya kamu cakep over limit",
+
+  "aku tuh suka jurnaling dan nulis, jadi aku abadiin cerita’ kita di buku diary dan website dari awal kenal sampai.. ntahlah? - agustus 2024",
+
+  "aku mau ga sama kamu? mau - juni 2024",
+
+  "lucu bangett kamu pas kangen terus datang kerumah aku, i was blushing so bad - 25 juli 2024",
+
+  "you became a familiar feeling in a way i never expected",
+
+  "kamu kapan main kerumah lagi kyy? udah ditanyain ibu terus nih",
+
+  "jangan lupaa jaga kesehatan yaa sayangg - mei 2026",
+
+  "hari ini aku diajak nonton!! seneng banget - 17 juni 2024",
+
+  "ternyata benar ya kata mamamu kalau kamu tu cakep, aku orang pertama yang paling setuju",
+
+  "jaga diri baik-baikk yaaaa, pontianak lagi ga fine",
+
+  "udahh dongg kamu tu jangan cakep terus, nanti yg lain minder - 25 juli 2024",
+
+  "coba senyum",
+
+  "kalau semua perasaan tentang kamu aku tulis, mungkin aku bisa bikin sampe ribuan website lagi - desember 2024",
+
+  "aku ga tau akhir cerita kita bakal seperti apa, tapi aku senang pernah jadi bagian dari halaman hidup kamu - 14 oktober 2025",
+
+  "wkwkwk lucu banget liat kamu protektif sama aku",
+
+  "this little star isn't really about asking you to stay, it's just my way of saying you mattered - 23 juni 2024",
+
+  "i like you a little more every time i get to know you.",
+
+  "EFFORT BANGETTT KAMU DATANG SIDANG AKU, aku makin melting, mana cakep bgt lagi ADDUUUHHH - 10 juli 2024",
+
+  "jangan begadang yaa biar ga sakit - juli 2024",
+
+  "suka heran kenapa aku bisa sesuka ini tapi ga bisa ekspresiin",
+
+  "aku benar benar mau sembuhh duluuu baru bisa punya hubungan, kamu… mau tunggu aku ndaa?",
+
+  "sayaanggg, besok dengarin aku yappingg lagii yaaa!!! aku mau nonton film banyak banyak terus ceritain lagi ke kamuu^^",
+
+  "dont be afraid, i have loved you for a thousand years - mei 2026",
+
+  "kamu diomongin ed sheeran tu, perfect katanya",
+
+  "ini obattt rekomen aku : kalau alergi pilek minum cetirizine, kalau sakit flu minum molexflu",
+
+  "jangan bosen ya dengerin aku yapping hehe",
+
+  "kamu nda pernah marahin aku walaupun aku menyebalkan, makasiiii sayanggkuu jangan bosan sama aku <3 ^•^ - 5 juni 2026",
+
+  "semua yang aku suka tentang kamu ya itu kamu sendiri - maret 2025",
+
+  "kunci hubungan itu komunikasi dan saling mengerti, mau perbaiki bareng lagi?",
+
+  "aku lagi pikachu, pikiran kacau thinking about you - februari 2025",
+
+  "kenalin aku ini cewe taurus (cegil mampus) - 3 juli 2024",
+
+  "KANGEEENNNN AYOO KETEMUU TERUSSS TIAP HARIII",
+
+  "oh iya aku suka main hp ya kalau sama kamu? btw aku tuu salting…",
+
+  "kamu semangat aku buat punya hidup yang lebih baik",
+
+  "jangan lupa pola hidup sehatt ya sayang, kan mau hidup lama bareng aku? - 8 juni 2026",
+
+  "aku lagi pengen beli coklat deh tapi yang buy one get you, dimana ya?",
+
+  "miss u, did u miss me kyy?- februari 2025",
+
+  "makasii yaa kue ulang tahunnyaa kyy - 8 mei 2025",
+
+  "baru kali ini aku pgn cpt cpt agustus, biar qtime sama kamu - 2 mei 2026",
+
+  "happy birthdayy kyy, semoga selalu sama aku terus ya - 13 okt 25",
+
+  "sayangg, kamu kok bikin kangen terus si tiap hari^^",
+
+  "aku panggil kamu kyy karena aku ingat kamu gasuka kalau dipanggil kii",
+
+  "touchy bangettt ternyata kamu ya, gapapa aku suka kok tapi nanti kalau udah pacaran wkwkwk",
+
+  "ini aku lagi berusaha jadi diri aku sepenuhnya supaya bisa jadi ur mine? haha ngayal",
+
+  "kamu nda perlu sempurna buat aku, karena kamu selalu sempurna dimata aku kiw",
+
+  "kamu keren banget bisa bertahan dan berjuang sehebat ini - november 2025",
+
+  "aku suka caper bikin sw biar kamu like dan reply HAHAHHAHA - april 2025",
+
+  "kamu tau nda? aku hafal wangi parfum kamu biar aku ingat kamu terus wkwkwk",
+
+  "kamu jangan kecapean yaa, ingatt kamu tu punya tipess - maret 2025",
+
+  "kamu sayang aku ndaaa?",
+
+  "kalau kamu baca ini, kita masih sama sama ndaa yaa sayangg? - mei 2026",
+
+  "aku ada bikin playlist spotify lohhhh namanya rapnes - desember 2024",
+
+  "aku beruntung banget bangettt kenal kamu",
+
+  "aku cuekk bangett yaa?? padahal ndaa lohhh, aku ndatau aja kalau ternyata itu cuekk, kamu nda bilang siii hummm",
+
+  "aku tuh kalau suka sm someone, aku nda berani ngomong dan tatap matanya, makanya aku banyak diam kalau sama kamu",
+
+  "mungkin kamu ndaa sadar kalau aku memperhatikan hal-hal kecil tentang kamu.",
+
+  "rizky, fachry, dzikry ohh ini nama adik-adiknyaa, akhirnya nemu juga - nov 2024",
+
+  "kamu cakepppp banget gilaaaaa - 17 juni 2024",
+
+  "makasiii udahh selaluu ada buat aku, selamanya ya? - oktober 2025",
+
+  "kamu tipenya ekstrovert, introvert, atau into my heart? wkwkwk - 19 juni 2024",
+
+  "makasii kyy krna udaahh hidup lebih lamaaa sampai akhirnya aku bisa ketemu kamu^•^",
+
+  "ajak aku terus yaa kyy! disetiap proses yang kamu lewati, i always by ur side",
+
+  "kamu kemana-mana bawa magnet ya kyy? kok bikin aku tertarik terus si wkwkw - 18 juli 2024",
+
+  "makasii ya kyy, uda kasih kenyamanan buat aku",
+
+  "kamu orang yang selalu aku tunggu kabar baiknya dari wani - september 2025",
+
+  "makasii ya sayangg udah hadir di hidup aku",
+
+  "kamu tau apa yang paling menyenangkan? dengar notif masuk dari kamu",
+
+  "kitaa… masih sama sama ndaa ya sampai bintang bintang ini selesai dikerjain? aku masih belajar codingnya - 30 mei 2026",
+
+  "kamu nda pernah marah samaa aku walaupun aku berisik, sayang kamu banyak banyakkk pacar aku yang paling cakepp sebumi <3 - 15 juni 2026",
+
+  "jujur pusing banget sih belajar coding ini + banyak kerjaan lagi - desember 2024",
+
+  "kalau suatu hari aku lupa banyak hal, semoga aku masih ingat rasanya pernah sebahagia itu waktu sama kamu",
+
+  "aku sayangnyaaa siaapaaa??",
+
+  "you’re still my favorite person, even on the days we don’t get along",
+
+  "aku bukan nda suka atau ilfeel, cuman masih banyak problem berat dan goals yang harus aku selesaikan - 28 juli 2024",
+
+  "i just really like being your girl.",
+
+  "oke lost contact lagi, misskom lagi dan lagi",
+
+  "do you think we could together someday?",
+
+  "tugas akhir bikin aku pusiinggg, nanti kita ketemu ya kalau aku udah nda burnout - juni 2024",
+
+  "hal terseru : dibujuk kamu hahahaha",
+
+  "ibu akuuu nanyain kamu terusss everyyydaaaayyy - 21 mei 2025",
+
+  "kalau ada award buat orang yang paling sering muncul di pikiran aku tanpa diundang, udah pasti kamu yang menang - 13 mei 2025",
+
+  "diajakin nonton dan serius lagi sama iky tapi belum bisa",
+
+  "karena jujur prioritas aku skrg : kesehatan, kerjaan, keluarga & problem solving, nanti dulu bole kann?",
+
+  "aku ndamau ajak kamu ke negative vibes yg aku punya",
+
+  "you’re kinda cute, you know that?",
+
+  "you always know how to make me laugh",
+
+  "jujur sih ni coding gagal terus",
+
+  "i will always be here for u - desember 2025",
+
+  "my love is greater than the hurt i feel - 28 mei 2026",
+
+  "hai kyy! ini tulisan terakhir di bintang kecil ini. still, i’m grateful i got to know you. i’m that means a lot to me<3!!",
+
+  "ini pesan yang ke 95?, aku… baru berani lanjut lagi dan i’ll finish the star and the website, ini janji aku ke diri sendiri - 22 september 2026",
+
+  "you really know how to make my day be nice",
+
+  "kamu tuh curang! bikin orang lain jadi biasa aja di mata aku (hihi)",
+
+  "kamu yang bawa aku jauh masuk ke dalam hubungan ini, and i cared you the most… i cant move - 27 mei 2026",
+
+  "i didn’t mean to get this attached to you",
+
+  "i love the little things you do without realizing it",
+
+  "you just feel like home to me, my favorite person since 2024",
+
+  "jaga kesehatann ya, banyakin makan sayurr!! JANGAN BEGADANG, banyakin minum air putih juga, aku ga tau sampai kapan bisa cerewet kaya gini, aku harap bisa selamanya",
+
+  "aku sampe lupa pesan apa yang udah aku input ke coding since 2024, ini aku cuman lanjutin aja sampe genap, terus yaudah deh aku kasih kamu - 8 oktober 2026",
+
+  "dan mungkin 138 bintang ini adalah cara aku menyimpan semua ingatan kecil itu di satu tempat selama kita berkenalan",
+
+  "honestly cape banget denger kabar indonesia akhir-akhir ini, jadi pengen tau kabar kamu deh, how was ur day?",
+
+  "lucu bangetttttt diam diam beliin aku gelang warna pink, makasii bangeetttt yaa kyy aku sukaaa!!!",
+
+  "humm kira-kira kamu kangen aku ga ya? - 23 september 2026",
+
+  "kamu tau kenapa bintangnya 138? karena.. tebak sendiri deh"
+
+];
+
+
+/* ========================================
+   CREATE STARS AUTOMATICALLY
+======================================== */
+
+const starsContainer =
+  document.getElementById("stars");
+
+const modal =
+  document.getElementById("modal");
+
+const message =
+  document.getElementById("message");
+
+const starNumber =
+  document.getElementById("starNumber");
+
+
+for (
+  let i = 0;
+  i < messages.length;
+  i++
+) {
+
+  const star =
+    document.createElement("button");
+
+  star.className =
+    "star";
+
+  star.innerHTML =
+    "★";
+
+  star.setAttribute(
+    "aria-label",
+    "Star " + (i + 1)
+  );
+
+  star.onclick =
+    function() {
+      openMessage(i);
+    };
+
+  starsContainer.appendChild(star);
+
+}
+
+
+/* ========================================
+   OPEN MESSAGE
+======================================== */
+
+function openMessage(index) {
+
+  starNumber.innerText =
+    "STAR " + (index + 1);
+
+  message.innerText =
+    messages[index];
+
+  modal.classList.add("show");
+
+}
+
+
+/* ========================================
+   CLOSE MESSAGE
+======================================== */
+
+function closeMessage() {
+
+  modal.classList.remove("show");
+
+}
+
+
+/* ========================================
+   CLOSE WHEN CLICKING OUTSIDE
+======================================== */
+
+function closeOutside(event) {
+
+  if (
+    event.target === modal
+  ) {
+
+    closeMessage();
+
+  }
+
+}
+
+
+/* ========================================
+   CLOSE WITH ESC KEY
+======================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeMessage();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
